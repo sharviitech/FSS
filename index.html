@@ -1,0 +1,489 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Families for Safe Streets — Homepage Wireframe</title>
+<style>
+  :root{
+    --ink:#222222; --soft:#555555; --line:#CCCCCC; --line2:#DDDDDD;
+    --dark:#3A3A3A; --panel:#F2F2F2; --img:#E4E4E4; --imgline:#9A9A9A;
+  }
+  *{box-sizing:border-box}
+  body{margin:0;font-family:system-ui,-apple-system,Segoe UI,Roboto,sans-serif;color:var(--ink);font-size:17px;line-height:1.5;background:#fff}
+  a{color:var(--ink);text-decoration:none}
+  a:hover{color:#000}
+  .in{max-width:1200px;margin:0 auto;padding:0 40px}
+  .sec{padding:80px 0}
+  @media (max-width:900px){ .in{padding:0 20px} .sec{padding:48px 0} }
+  .img{background:var(--img);border:1px dashed var(--imgline);display:flex;align-items:center;justify-content:center;text-align:center;color:var(--soft);font-size:14px;line-height:1.4;padding:14px}
+  .btn{display:inline-flex;align-items:center;justify-content:center;min-height:48px;padding:0 22px;border-radius:6px;font-weight:700;font-size:16px;text-decoration:none;white-space:nowrap;border:0;cursor:pointer;font-family:inherit}
+  .btn.p{background:var(--ink);color:#fff}
+  .btn.p:hover{color:#fff;background:#000}
+  .btn.s{border:2px solid var(--ink);color:var(--ink);background:#fff}
+  .btn.s:hover{color:var(--ink)}
+  .ey{margin:0;font-size:14px;font-weight:700;color:var(--soft)}
+  .h2{margin:0;font-size:36px;line-height:1.2}
+  @media (max-width:900px){ .h2{font-size:25px} }
+  .card{background:#fff;border:1px solid var(--line);border-radius:8px;padding:24px;display:flex;flex-direction:column;gap:10px}
+  .tab{min-height:44px;padding:0 18px;border-radius:22px;font:700 15px system-ui,sans-serif;cursor:pointer;background:#fff;color:var(--ink);border:2px solid var(--ink)}
+  .tab[aria-selected="true"]{background:var(--ink);color:#fff}
+  .date{flex:0 0 64px;height:64px;border:2px solid var(--ink);border-radius:8px;display:flex;flex-direction:column;align-items:center;justify-content:center;line-height:1.1;background:#fff}
+  .erow{display:flex;gap:16px;align-items:flex-start;padding:16px 0;border-bottom:1px solid var(--line2);text-decoration:none}
+  .grid12{display:grid;grid-template-columns:repeat(12,minmax(0,1fr));gap:32px}
+  @media (max-width:900px){ .grid12{display:flex;flex-direction:column;gap:28px} .grid12>*{grid-column:auto!important} }
+  .stat-row{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:24px;text-align:center}
+  @media (max-width:640px){ .stat-row{grid-template-columns:repeat(2,minmax(0,1fr));gap:20px} }
+  .three-col{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:24px}
+  @media (max-width:900px){ .three-col{grid-template-columns:1fr} }
+  .two-col{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:40px}
+  @media (max-width:900px){ .two-col{grid-template-columns:1fr;gap:28px} }
+
+  /* top bar + header */
+  .topbar{background:#2B2B2B;color:#fff;font-size:14px}
+  .topbar .in{display:flex;justify-content:space-between;align-items:center;gap:16px;min-height:44px;flex-wrap:wrap}
+  .topbar a{color:#fff}
+  header.site{background:#fff;border-bottom:1px solid var(--line)}
+  header.site .in{display:flex;align-items:center;justify-content:space-between;gap:24px;min-height:96px;flex-wrap:wrap}
+  .logo img{width:72px;height:72px;display:block}
+  nav.main-nav{display:flex;gap:30px;font-weight:600;font-size:16px}
+  .header-ctas{display:flex;gap:12px}
+  .hamburger{display:none;width:48px;height:48px;border:2px solid var(--ink);border-radius:6px;background:#fff;align-items:center;justify-content:center;cursor:pointer}
+  @media (max-width:900px){
+    nav.main-nav{display:none}
+    .header-ctas .btn.s{display:none}
+    .hamburger{display:flex}
+    .logo img{width:56px;height:56px}
+    header.site .in{min-height:auto;padding:10px 20px}
+  }
+
+  /* hero */
+  .hero{background:var(--dark);color:#fff;padding:88px 0}
+  @media (max-width:900px){ .hero{padding:40px 0} }
+  .hero h1{margin:0;font-size:52px;line-height:1.1}
+  @media (max-width:900px){ .hero h1{font-size:32px} }
+  .doors{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:16px;max-width:640px}
+  @media (max-width:640px){ .doors{grid-template-columns:1fr} }
+  .door{background:#fff;color:var(--ink);border-radius:8px;padding:20px;display:flex;flex-direction:column;gap:4px;min-height:100px}
+
+  /* membership chapters */
+  .chapters-wrap{border:1px solid var(--line);border-radius:8px;overflow:hidden;display:flex;flex-direction:column}
+  .chapters-wrap .list{height:420px;overflow-y:auto;padding:8px 16px 16px}
+  @media (max-width:900px){ .chapters-wrap .list{height:300px} }
+  .chapter-row{width:100%;display:flex;justify-content:space-between;align-items:center;gap:12px;text-align:left;min-height:60px;padding:10px 14px;margin-top:8px;border-radius:6px;cursor:pointer;background:#fff;border:1px solid var(--line);font-family:inherit}
+  .chapter-row[aria-pressed="true"]{background:var(--ink);color:#fff;border-color:var(--ink)}
+  .region-pill{min-height:40px;padding:0 14px;border-radius:20px;font:600 14px system-ui,sans-serif;cursor:pointer;background:#fff;color:var(--ink);border:1px solid #999}
+  .region-pill[aria-pressed="true"]{background:var(--ink);color:#fff;border:2px solid var(--ink)}
+  .sticky-col{position:sticky;top:24px;display:flex;flex-direction:column;gap:16px}
+  @media (max-width:900px){ .sticky-col{position:static} }
+
+  footer.site{background:var(--ink);color:#fff;padding:64px 0 28px;font-size:15px}
+  footer.site a{color:#fff}
+  .social-icon{width:40px;height:40px;border:1px solid #777;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:700}
+
+  /* mobile menu drawer */
+  .drawer-overlay{position:fixed;inset:0;background:rgba(0,0,0,.4);display:none;z-index:40}
+  .drawer-overlay.open{display:block}
+  .drawer{position:fixed;top:0;right:0;height:100%;width:min(390px,90vw);background:#fff;z-index:41;transform:translateX(100%);transition:transform .2s ease;display:flex;flex-direction:column}
+  .drawer.open{transform:translateX(0)}
+  .drawer-head{padding:10px 20px;display:flex;align-items:center;justify-content:space-between;border-bottom:1px solid var(--line);min-height:68px}
+  .drawer-nav{flex:1;display:flex;flex-direction:column;padding:8px 20px;overflow-y:auto}
+  .drawer-item{background:none;border:0;border-bottom:1px solid var(--line2);padding:14px 0;display:flex;justify-content:space-between;font:700 20px system-ui,sans-serif;color:var(--ink);min-height:56px;width:100%;text-align:left;cursor:pointer}
+  .drawer-foot{padding:20px;display:flex;flex-direction:column;gap:10px;border-top:1px solid var(--line);background:#F7F7F7}
+</style>
+</head>
+<body>
+
+<div class="topbar">
+  <div class="in">
+    <p style="margin:0">Need to talk to someone? <a href="#" style="font-weight:700">Call (844) 377-7337</a></p>
+    <div style="display:flex;gap:22px"><a href="#">Español</a><a href="#">Members sign in</a></div>
+  </div>
+</div>
+
+<header class="site">
+  <div class="in">
+    <a class="logo" href="#" aria-label="Families for Safe Streets home">
+      <img alt="Families for Safe Streets" src="data:image/svg+xml;utf8,%3Csvg xmlns='http://www.w3.org/2000/svg' width='72' height='72'%3E%3Ccircle cx='36' cy='36' r='34' fill='%23050708' stroke='%23FFC20E' stroke-width='3'/%3E%3Ctext x='36' y='41' font-family='system-ui' font-size='11' fill='%23FFC20E' text-anchor='middle'%3EFSS%3C/text%3E%3C/svg%3E">
+    </a>
+    <nav class="main-nav" aria-label="Main">
+      <a href="#">About ▾</a>
+      <a href="#">Get Support ▾</a>
+      <a href="#">Take Action ▾</a>
+      <a href="#">Membership ▾</a>
+      <a href="#">Stories &amp; News ▾</a>
+    </nav>
+    <div class="header-ctas">
+      <a class="btn s" href="#">Get support</a>
+      <a class="btn p" href="#">Donate</a>
+      <button class="hamburger" aria-label="Open menu" id="menuOpen" type="button">
+        <svg width="22" height="16" viewBox="0 0 22 16" aria-hidden="true"><path d="M1 1h20M1 8h20M1 15h20" stroke="#222222" stroke-width="2" fill="none" stroke-linecap="round"/></svg>
+      </button>
+    </div>
+  </div>
+</header>
+
+<section class="hero">
+  <div class="in grid12" style="align-items:center">
+    <div style="grid-column:span 7;display:flex;flex-direction:column;gap:20px">
+      <h1>Turning grief into action to end traffic violence</h1>
+      <p style="margin:0;font-size:20px;max-width:600px">Families for Safe Streets supports, organizes and elevates the voices of people affected by roadway deaths and serious injuries.</p>
+      <div class="doors">
+        <a class="door" href="#"><span style="font-weight:700;font-size:18px">I've been affected by a crash</span><span style="font-size:15px;color:#555">Free support from people who understand →</span></a>
+        <a class="door" href="#"><span style="font-weight:700;font-size:18px">I want to help end traffic violence</span><span style="font-size:15px;color:#555">Campaigns and actions you can take today →</span></a>
+      </div>
+    </div>
+    <div class="img" style="grid-column:span 5;height:440px;border-radius:8px;background:#555;color:#eee;border-color:#888">Photo of FSS members together</div>
+  </div>
+</section>
+
+<section class="sec" style="padding:56px 0">
+  <div class="in stat-row">
+    <div><p style="margin:0;font-size:40px;font-weight:800">44,450</p><p style="margin:4px 0 0;font-size:15px;color:var(--soft)">Americans killed in crashes every year</p></div>
+    <div><p style="margin:0;font-size:40px;font-weight:800">120</p><p style="margin:4px 0 0;font-size:15px;color:var(--soft)">People killed every day</p></div>
+    <div><p style="margin:0;font-size:40px;font-weight:800">14,000+</p><p style="margin:4px 0 0;font-size:15px;color:var(--soft)">People seriously injured every day</p></div>
+    <div><p style="margin:0;font-size:40px;font-weight:800">1,100+</p><p style="margin:4px 0 0;font-size:15px;color:var(--soft)">FSS members nationwide</p></div>
+  </div>
+</section>
+
+<section class="sec">
+  <div class="in grid12" style="align-items:center">
+    <div class="img" style="grid-column:span 5;height:360px;border-radius:8px">Photo of FSS members at a gathering or rally</div>
+    <div style="grid-column:span 7;display:flex;flex-direction:column;gap:16px">
+      <p class="ey">Who we are</p>
+      <h2 class="h2">Founded by families. Led by people who know this loss.</h2>
+      <p style="margin:0;max-width:620px">Families for Safe Streets was founded in New York City in 2014 by people who lost loved ones or were seriously injured in traffic crashes. Today our members support each other, share their stories and organize for life-saving change across the country.</p>
+      <div class="three-col" style="margin-top:4px">
+        <div style="border-top:3px solid var(--ink);padding-top:10px"><p style="margin:0;font-weight:700">Support</p><p style="margin:0;font-size:15px;color:var(--soft)">No one goes through it alone</p></div>
+        <div style="border-top:3px solid var(--ink);padding-top:10px"><p style="margin:0;font-weight:700">Storytelling</p><p style="margin:0;font-size:15px;color:var(--soft)">Our stories move decision-makers</p></div>
+        <div style="border-top:3px solid var(--ink);padding-top:10px"><p style="margin:0;font-weight:700">Organizing</p><p style="margin:0;font-size:15px;color:var(--soft)">Grassroots change, nationwide</p></div>
+      </div>
+      <a class="btn s" href="#" style="align-self:flex-start;margin-top:4px">Our story</a>
+    </div>
+  </div>
+</section>
+
+<section class="sec" style="background:var(--panel)">
+  <div class="in" style="display:flex;flex-direction:column;gap:32px">
+    <div style="display:flex;justify-content:space-between;align-items:flex-end;gap:24px;flex-wrap:wrap">
+      <div style="display:flex;flex-direction:column;gap:10px;max-width:680px"><p class="ey">Get support</p><h2 class="h2">You don't have to go through this alone.</h2><p style="margin:0">If you lost a loved one, were injured, or care for someone who was, our support is free and led by people who have been there.</p></div>
+      <a class="btn s" href="#">Call (844) 377-7337</a>
+    </div>
+    <div class="three-col">
+      <div class="card"><div class="img" style="width:52px;height:52px;padding:0;border-radius:50%">icon</div><h3 style="margin:0;font-size:22px">Support gatherings</h3><p style="margin:0">Facilitated groups for survivors, siblings and families, every month.</p><a href="#" style="font-weight:700">Attend a gathering →</a></div>
+      <div class="card"><div class="img" style="width:52px;height:52px;padding:0;border-radius:50%">icon</div><h3 style="margin:0;font-size:22px">Peer mentors</h3><p style="margin:0">Be matched with a trained volunteer who has lived through a similar loss or injury.</p><a href="#" style="font-weight:700">Find a mentor →</a></div>
+      <div class="card"><div class="img" style="width:52px;height:52px;padding:0;border-radius:50%">icon</div><h3 style="margin:0;font-size:22px">Post-Crash Resource Guide</h3><p style="margin:0">Victims' rights, legal and insurance systems, and what to expect.</p><a href="#" style="font-weight:700">Read the guide →</a></div>
+    </div>
+  </div>
+</section>
+
+<section class="sec">
+  <div class="in" style="display:flex;flex-direction:column;gap:32px">
+    <div style="display:flex;flex-direction:column;gap:10px;max-width:720px"><p class="ey">Take action</p><h2 class="h2">What we're fighting for</h2><p style="margin:0">Our members' stories move decision-makers to act. These are our national priorities.</p></div>
+    <div class="three-col">
+      <div style="border-top:4px solid var(--ink);padding-top:16px;display:flex;flex-direction:column;gap:8px"><h3 style="margin:0;font-size:22px">Safe Vehicles</h3><p style="margin:0;color:var(--soft)">Stop Super Speeders and autonomous vehicle safety.</p><a href="#" style="font-weight:700">Safe Vehicles →</a></div>
+      <div style="border-top:4px solid var(--ink);padding-top:16px;display:flex;flex-direction:column;gap:8px"><h3 style="margin:0;font-size:22px">Safe Roads</h3><p style="margin:0;color:var(--soft)">Designing roads to encourage safe driving and mitigate human error is one of the most important ways to address this crisis.</p><a href="#" style="font-weight:700">Safe Roads →</a></div>
+      <div style="border-top:4px solid var(--ink);padding-top:16px;display:flex;flex-direction:column;gap:8px"><h3 style="margin:0;font-size:22px">Safe Speeds</h3><p style="margin:0;color:var(--soft)">Unsafe speeds are a well-documented factor in death and injury, especially among people outside of a vehicle.</p><a href="#" style="font-weight:700">Safe Speeds →</a></div>
+    </div>
+    <div class="grid12" style="background:var(--panel);border-radius:8px;padding:36px;align-items:center">
+      <div style="grid-column:span 7;display:flex;flex-direction:column;gap:12px"><p class="ey">Featured campaign</p><h3 style="margin:0;font-size:30px">Stop Super Speeders</h3><p style="margin:0">Laws requiring Intelligent Speed Assistance for drivers with repeated extreme speeding violations. Nine jurisdictions now have these laws, six of them passed in 2026.</p><div style="display:flex;gap:12px;flex-wrap:wrap"><a class="btn p" href="#">Email your legislators</a><a class="btn s" href="#">Join the coalition</a></div></div>
+      <div style="grid-column:span 5;background:#fff;border:1px solid var(--line);border-radius:8px;padding:22px;display:flex;flex-direction:column;gap:6px"><p style="margin:0;font-weight:700">Laws passed so far</p><p style="margin:0;font-size:15px">2024 · Washington, D.C.</p><p style="margin:0;font-size:15px">2025 · Virginia, Washington</p><p style="margin:0;font-size:15px">2026 · Arizona, Georgia, Hawaii, Illinois, Maryland, New York</p></div>
+    </div>
+  </div>
+</section>
+
+<section class="sec" style="background:var(--dark);color:#fff">
+  <div class="in" style="display:flex;flex-direction:column;gap:32px">
+    <div style="display:flex;justify-content:space-between;align-items:flex-end;gap:24px;flex-wrap:wrap">
+      <div style="display:flex;flex-direction:column;gap:10px;max-width:720px"><p class="ey" style="color:#ddd">Our stories</p><h2 class="h2">Every number was someone we love</h2><p style="margin:0;color:#eee">Members and partner organizations share the stories of loved ones lost and lives changed by traffic crashes.</p></div>
+      <a href="#" style="color:#fff;font-weight:700">Explore all stories →</a>
+    </div>
+    <div class="grid12" style="align-items:stretch">
+      <div style="grid-column:span 5;background:#fff;color:var(--ink);border-radius:8px;overflow:hidden;display:flex;flex-direction:column">
+        <div class="img" style="height:240px;border:0">Portrait of the featured member</div>
+        <div style="padding:24px;display:flex;flex-direction:column;gap:10px">
+          <p style="margin:0;font-size:22px;line-height:1.35;font-weight:700">"[A short quote from a member's story, approved by them]"</p>
+          <p style="margin:0;font-size:15px;color:var(--soft)">[Name], [relationship to their loved one], [chapter]</p>
+          <a class="btn s" href="#" style="align-self:flex-start">Read their story</a>
+        </div>
+      </div>
+      <div style="grid-column:span 7;display:flex;flex-direction:column;gap:16px">
+        <div class="img" style="flex:1;min-height:300px;border-radius:8px;background:#555;color:#eee;border-color:#888">FSS Story Map preview: US map with story pins, opens the interactive map</div>
+        <div style="display:flex;justify-content:space-between;align-items:center;gap:16px;flex-wrap:wrap">
+          <p style="margin:0;font-size:15px;color:#eee;max-width:420px">Add your loved one, or your own story, to the FSS Story Map.</p>
+          <div style="display:flex;gap:10px"><a class="btn" href="#" style="background:#fff;color:var(--ink)">Open the Story Map</a><a class="btn" href="#" style="border:2px solid #fff;color:#fff">Add a story</a></div>
+        </div>
+      </div>
+    </div>
+    <div style="border-top:1px solid #666;padding-top:20px"><p style="margin:0;font-size:18px">"I cannot overstate it: Families for Safe Streets… are among the most powerful advocacy forces I've ever seen in politics…"</p><p style="margin:6px 0 0;font-size:15px;color:#ddd">Polly Trottenberg, former NYC DOT Commissioner and USDOT Deputy Secretary</p></div>
+  </div>
+</section>
+
+<section class="sec">
+  <div class="in" style="display:flex;flex-direction:column;gap:32px">
+    <div class="grid12" style="align-items:start">
+      <div style="grid-column:span 7;display:flex;flex-direction:column;gap:14px">
+        <p class="ey">Membership &amp; chapters</p>
+        <h2 class="h2">A national movement, built by families</h2>
+        <p style="margin:0">Members get training, the member calendar and member-only resources, and join a local chapter or Ambassador network.</p>
+        <div style="display:flex;gap:36px;flex-wrap:wrap;margin-top:4px">
+          <div><p style="margin:0;font-size:34px;font-weight:700">2014</p><p style="margin:0;font-size:15px;color:var(--soft)">Founded in New York City</p></div>
+          <div><p style="margin:0;font-size:34px;font-weight:700">[20]</p><p style="margin:0;font-size:15px;color:var(--soft)">Chapters</p></div>
+          <div><p style="margin:0;font-size:34px;font-weight:700">1,100+</p><p style="margin:0;font-size:15px;color:var(--soft)">Members</p></div>
+        </div>
+      </div>
+      <div style="grid-column:span 5;background:var(--panel);border-radius:8px;padding:24px;display:flex;flex-direction:column;gap:14px">
+        <p style="margin:0;font-weight:700;font-size:19px">Who can join</p>
+        <a class="btn p" href="#" style="align-self:flex-start">Become a member</a>
+        <div style="display:flex;flex-direction:column;gap:10px">
+          <p style="margin:0;display:flex;gap:10px"><span aria-hidden="true">✓</span>You lost a loved one in a traffic crash</p>
+          <p style="margin:0;display:flex;gap:10px"><span aria-hidden="true">✓</span>You were seriously injured in a crash</p>
+          <p style="margin:0;display:flex;gap:10px"><span aria-hidden="true">✓</span>You care for someone who was injured</p>
+        </div>
+        <p style="margin:0;font-size:15px;color:var(--soft)">Not personally affected? <a href="#" style="font-weight:700">Join our email list</a> · No chapter near you? <a href="#" style="font-weight:700">Start one</a></p>
+      </div>
+    </div>
+
+    <div class="grid12" style="align-items:start">
+      <div class="chapters-wrap" style="grid-column:span 7">
+        <div role="group" aria-label="Filter chapters by region" id="regionPills" style="display:flex;flex-wrap:wrap;gap:8px;padding:16px;border-bottom:1px solid var(--line);background:#fafafa"></div>
+        <div tabindex="0" aria-label="Chapter list" class="list" id="chapterList"></div>
+        <p style="margin:0;padding:10px 16px;border-top:1px solid var(--line);font-size:13px;color:var(--soft);background:#fafafa" id="countLabel"></p>
+      </div>
+      <div class="sticky-col" style="grid-column:span 5">
+        <div style="background:var(--panel);border-radius:8px;padding:26px;display:flex;flex-direction:column;gap:10px;min-height:380px" id="chapterDetail"></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="sec" style="background:var(--panel)">
+  <div class="in" style="display:flex;flex-direction:column;gap:28px">
+    <div style="display:flex;flex-direction:column;gap:10px"><p class="ey">Events &amp; news</p><h2 class="h2">What's happening</h2></div>
+    <div style="background:var(--ink);color:#fff;border-radius:8px;padding:28px 32px;display:flex;justify-content:space-between;align-items:center;gap:24px;flex-wrap:wrap">
+      <div style="display:flex;gap:22px;align-items:center">
+        <div class="date" style="border-color:#fff;background:transparent;color:#fff;flex-basis:76px;height:76px"><span style="font-size:13px;font-weight:700">NOV</span><span style="font-size:30px;font-weight:800">15</span></div>
+        <div style="display:flex;flex-direction:column;gap:4px"><p style="margin:0;font-size:14px;color:#ddd">Sunday, November 15, 2026 · nationwide</p><h3 style="margin:0;font-size:26px">World Day of Remembrance</h3><p style="margin:0;color:#eee">Remember, support and act. Virtual candlelighting on Tuesday, November 17, 8–9 PM ET.</p></div>
+      </div>
+      <a class="btn" href="#" style="background:#fff;color:var(--ink)">Find an event</a>
+    </div>
+    <div class="two-col">
+      <div style="display:flex;flex-direction:column">
+        <div style="display:flex;justify-content:space-between;align-items:baseline;border-bottom:2px solid var(--ink);padding-bottom:8px"><h3 style="margin:0;font-size:22px">Upcoming events</h3><a href="#" style="font-weight:700;font-size:15px">Full calendar →</a></div>
+        <a href="#" class="erow"><div class="date"><span style="font-size:12px;font-weight:700">OCT</span><span style="font-size:24px;font-weight:800">29</span></div><div><p style="margin:0;font-weight:700">East Coast Leadership Training Institute</p><p style="margin:0;font-size:14px;color:var(--soft)">Thursday, 9:30 AM–4:30 PM · New York City, in person · free, RSVP</p></div></a>
+        <a href="#" class="erow"><div class="date"><span style="font-size:12px;font-weight:700">NOV</span><span style="font-size:24px;font-weight:800">17</span></div><div><p style="margin:0;font-weight:700">World Day of Remembrance virtual candlelighting</p><p style="margin:0;font-size:14px;color:var(--soft)">Tuesday, 8–9 PM ET · online</p></div></a>
+        <a href="#" class="erow"><div class="date"><span style="font-size:12px;font-weight:700">NOV</span><span style="font-size:24px;font-weight:800">18</span></div><div><p style="margin:0;font-weight:700">Survivor Support Gathering</p><p style="margin:0;font-size:14px;color:var(--soft)">Wednesday, 7–8 PM ET · peer support for crash survivors · RSVP</p></div></a>
+        <a href="#" class="erow"><div class="date"><span style="font-size:12px;font-weight:700">NOV</span><span style="font-size:24px;font-weight:800">18</span></div><div><p style="margin:0;font-weight:700">Policy Chat: Car Bloat, Speed, and the Future of Our Streets</p><p style="margin:0;font-size:14px;color:var(--soft)">Wednesday, 12–1 PM ET · with David Zipper · RSVP</p></div></a>
+      </div>
+      <div style="display:flex;flex-direction:column">
+        <div style="display:flex;justify-content:space-between;align-items:baseline;border-bottom:2px solid var(--ink);padding-bottom:8px"><h3 style="margin:0;font-size:22px">Latest news</h3><a href="#" style="font-weight:700;font-size:15px">All news →</a></div>
+        <a href="#" class="erow"><div class="img" style="flex:0 0 110px;height:76px;padding:4px">Image</div><div><p style="margin:0;font-size:13px;color:var(--soft)">July 23, 2026</p><p style="margin:0;font-weight:700">A Record-Breaking Year: Stop Super Speeders Campaign Marks 2026 Legislative Session</p></div></a>
+        <a href="#" class="erow"><div class="img" style="flex:0 0 110px;height:76px;padding:4px">Image</div><div><p style="margin:0;font-size:13px;color:var(--soft)">July 15, 2026</p><p style="margin:0;font-weight:700">Hawai'i Governor Josh Green Signs Landmark "Stop Super Speeders" Bill into Law</p></div></a>
+        <a href="#" class="erow"><div class="img" style="flex:0 0 110px;height:76px;padding:4px">Image</div><div><p style="margin:0;font-size:13px;color:var(--soft)">June 26, 2026</p><p style="margin:0;font-weight:700">Governor JB Pritzker Signs Landmark "Stop Super Speeders" Bill into Law</p></div></a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section style="padding:64px 0">
+  <div class="in" style="display:flex;flex-direction:column;gap:22px">
+    <div style="display:flex;justify-content:space-between;align-items:center;gap:16px;flex-wrap:wrap">
+      <h2 style="margin:0;font-size:28px">Follow us</h2>
+      <div role="tablist" aria-label="Social media feed" id="socialTabs" style="display:flex;gap:8px;flex-wrap:wrap"></div>
+    </div>
+    <div id="socialPanels"></div>
+    <a href="#" id="followLink" style="font-weight:700;align-self:flex-start"></a>
+  </div>
+</section>
+
+<section class="sec" style="background:var(--panel)">
+  <div class="in two-col">
+    <div style="display:flex;flex-direction:column;gap:14px">
+      <p class="ey">Get involved</p>
+      <h2 style="margin:0;font-size:30px">Stand with us</h2>
+      <p style="margin:0">Campaign updates and ways to help, delivered to your inbox.</p>
+      <label for="d-email" style="font-weight:700">Email address</label>
+      <div style="display:flex;gap:12px;flex-wrap:wrap">
+        <input id="d-email" type="email" autocomplete="email" style="flex:1 1 260px;min-height:48px;border:1px solid #888;border-radius:6px;padding:0 14px;font-size:17px">
+        <button type="button" class="btn p" id="joinListBtn">Join our email list</button>
+      </div>
+    </div>
+    <div style="display:flex;flex-direction:column;gap:14px;border-left:1px solid var(--line);padding-left:48px">
+      <p class="ey">Donate</p>
+      <h2 style="margin:0;font-size:30px">Help us end traffic violence</h2>
+      <p style="margin:0">Your gift funds free support for families and advocacy for safer streets. Families for Safe Streets is a project of Transportation Alternatives, so your bank statement will show "Transportation Alternatives".</p>
+      <a class="btn p" href="#" style="align-self:flex-start">Donate</a>
+    </div>
+  </div>
+</section>
+
+<footer class="site">
+  <div class="in" style="display:flex;flex-direction:column;gap:36px">
+    <div class="grid12">
+      <div style="grid-column:span 4;display:flex;flex-direction:column;gap:12px">
+        <img alt="Families for Safe Streets" style="width:96px;height:96px;display:block" src="data:image/svg+xml;utf8,%3Csvg xmlns='http://www.w3.org/2000/svg' width='96' height='96'%3E%3Ccircle cx='48' cy='48' r='45' fill='%23050708' stroke='%23FFC20E' stroke-width='4'/%3E%3Ctext x='48' y='54' font-family='system-ui' font-size='14' fill='%23FFC20E' text-anchor='middle'%3EFSS%3C/text%3E%3C/svg%3E">
+        <p style="margin:0;max-width:300px">Supporting people affected by traffic violence, and working to end it.</p>
+        <p style="margin:0;color:#ccc">A project of Transportation Alternatives</p>
+      </div>
+      <div style="grid-column:span 3;display:flex;flex-direction:column;gap:6px">
+        <p style="margin:0 0 4px;font-weight:700">Contact</p>
+        <a href="#">(844) 377-7337</a>
+        <p style="margin:0">info@familiesforsafestreets.org</p>
+        <p style="margin:0">Press: press@familiesforsafestreets.org</p>
+        <p style="margin:0;color:#ccc">c/o Transportation Alternatives, 111 John St, Suite 260, New York, NY 10038</p>
+      </div>
+      <div style="grid-column:span 2;display:flex;flex-direction:column;gap:6px">
+        <p style="margin:0 0 4px;font-weight:700">Quick links</p>
+        <a href="#">Get Support</a><a href="#">Take Action</a><a href="#">Membership</a><a href="#">Calendar</a><a href="#">Story Map</a><a href="#">New York chapter</a>
+      </div>
+      <div style="grid-column:span 3;display:flex;flex-direction:column;gap:6px">
+        <p style="margin:0 0 4px;font-weight:700">If you need help now</p>
+        <p style="margin:0">Emergency: call 911</p>
+        <p style="margin:0">Emotional crisis: call or text 988</p>
+      </div>
+    </div>
+    <div style="border-top:1px solid #555;padding-top:18px;display:flex;justify-content:space-between;align-items:center;gap:16px;flex-wrap:wrap;color:#ccc">
+      <div style="display:flex;gap:10px">
+        <a class="social-icon" href="#" aria-label="Instagram">IG</a>
+        <a class="social-icon" href="#" aria-label="YouTube">YT</a>
+        <a class="social-icon" href="#" aria-label="Bluesky">BS</a>
+        <a class="social-icon" href="#" aria-label="Facebook">FB</a>
+      </div>
+      <p style="margin:0">© Families for Safe Streets · <a href="#" style="color:#ccc">Privacy policy</a> · <a href="#" style="color:#ccc">Accessibility statement</a> · <a href="#" style="color:#ccc">Español</a></p>
+    </div>
+  </div>
+</footer>
+
+<div class="drawer-overlay" id="drawerOverlay"></div>
+<div class="drawer" id="drawer">
+  <div class="drawer-head">
+    <img alt="Families for Safe Streets" style="width:56px;height:56px" src="data:image/svg+xml;utf8,%3Csvg xmlns='http://www.w3.org/2000/svg' width='56' height='56'%3E%3Ccircle cx='28' cy='28' r='26' fill='%23050708' stroke='%23FFC20E' stroke-width='3'/%3E%3Ctext x='28' y='32' font-family='system-ui' font-size='9' fill='%23FFC20E' text-anchor='middle'%3EFSS%3C/text%3E%3C/svg%3E">
+    <button id="menuClose" aria-label="Close menu" type="button" style="width:48px;height:48px;border:2px solid #222;border-radius:6px;background:#fff">✕</button>
+  </div>
+  <nav class="drawer-nav" aria-label="Main">
+    <button class="drawer-item" type="button">Get Support <span>+</span></button>
+    <button class="drawer-item" type="button">Take Action <span>+</span></button>
+    <button class="drawer-item" type="button">Membership <span>+</span></button>
+    <button class="drawer-item" type="button">Stories &amp; News <span>+</span></button>
+    <button class="drawer-item" type="button">About <span>+</span></button>
+  </nav>
+  <div class="drawer-foot">
+    <a class="btn p" href="#">Donate</a>
+    <a class="btn s" href="#">Call (844) 377-7337</a>
+    <p style="margin:0;font-size:14px;color:var(--soft);text-align:center">Members sign in · Español</p>
+  </div>
+</div>
+
+<script>
+// mobile drawer
+const drawer = document.getElementById('drawer');
+const overlay = document.getElementById('drawerOverlay');
+function openDrawer(){ drawer.classList.add('open'); overlay.classList.add('open'); }
+function closeDrawer(){ drawer.classList.remove('open'); overlay.classList.remove('open'); }
+document.getElementById('menuOpen').addEventListener('click', openDrawer);
+document.getElementById('menuClose').addEventListener('click', closeDrawer);
+overlay.addEventListener('click', closeDrawer);
+
+// chapters
+const chapterData = [
+  { region: 'Northeast', items: [['New York City', 'Our founding chapter, started in 2014. It has its own website.'], ['New Jersey', ''], ['Philadelphia, PA', '']] },
+  { region: 'Mid-Atlantic', items: [['Greater Washington, DC', ''], ['Alexandria, VA', ''], ['Arlington, VA', ''], ['Fairfax, VA', ''], ['Richmond, VA', ''], ['Montgomery County, MD', '']] },
+  { region: 'South', items: [['Atlanta, GA', ''], ['Nashville, TN', ''], ['Central Texas', '']] },
+  { region: 'Midwest', items: [['Cleveland, OH', '']] },
+  { region: 'West', items: [['San Francisco Bay Area, CA', ''], ['Greater Los Angeles, CA', ''], ['San Diego, CA', ''], ['Provo, UT', ''], ['Northern Oregon / SW Washington', '']] },
+  { region: 'Canada', items: [['Toronto', '']] },
+  { region: 'To confirm with FSS', items: [['[20th chapter]', 'FSS lists 20 chapters; this one is not named on the public site.']] }
+];
+const allChapters = [];
+chapterData.forEach(g => g.items.forEach(it => allChapters.push({ name: it[0], note: it[1], region: g.region })));
+let currentRegion = 'All';
+let currentChapter = 'New York City';
+
+function renderChapters(){
+  const pillsEl = document.getElementById('regionPills');
+  const listEl = document.getElementById('chapterList');
+  const countEl = document.getElementById('countLabel');
+  const detailEl = document.getElementById('chapterDetail');
+
+  const regions = ['All'].concat(chapterData.map(g => g.region));
+  pillsEl.innerHTML = '';
+  regions.forEach(r => {
+    const n = r === 'All' ? allChapters.length : allChapters.filter(c => c.region === r).length;
+    const btn = document.createElement('button');
+    btn.type = 'button'; btn.className = 'region-pill';
+    btn.setAttribute('aria-pressed', r === currentRegion ? 'true' : 'false');
+    btn.textContent = r + ' (' + n + ')';
+    btn.addEventListener('click', () => { currentRegion = r; renderChapters(); });
+    pillsEl.appendChild(btn);
+  });
+
+  const shown = allChapters.filter(c => currentRegion === 'All' || c.region === currentRegion);
+  listEl.innerHTML = '';
+  shown.forEach(c => {
+    const btn = document.createElement('button');
+    btn.type = 'button'; btn.className = 'chapter-row';
+    btn.setAttribute('aria-pressed', c.name === currentChapter ? 'true' : 'false');
+    btn.innerHTML = '<span style="display:flex;flex-direction:column;align-items:flex-start;gap:2px"><span style="font-weight:700;font-size:16px">' + c.name + '</span><span style="font-size:13px;opacity:.75">' + c.region + '</span></span><span aria-hidden="true" style="font-size:18px">→</span>';
+    btn.addEventListener('click', () => { currentChapter = c.name; renderChapters(); });
+    listEl.appendChild(btn);
+  });
+  countEl.textContent = 'Showing ' + shown.length + ' of ' + allChapters.length + ' chapters · scroll for more';
+
+  const found = allChapters.find(c => c.name === currentChapter) || allChapters[0];
+  detailEl.innerHTML =
+    '<p class="ey">' + found.region + '</p>' +
+    '<h3 style="margin:0;font-size:26px">FSS ' + found.name + '</h3>' +
+    '<p style="margin:0;font-size:15px">' + (found.note || 'Support gatherings, local advocacy and a community of people who understand.') + '</p>' +
+    '<div class="img" style="height:110px;border-radius:6px">Chapter photo</div>' +
+    '<p style="margin:0;font-size:15px;color:var(--soft)">[Chapter lead and contact email, from FSS]</p>' +
+    '<div style="display:flex;gap:10px;flex-wrap:wrap;margin-top:auto"><a class="btn p" href="#">Contact this chapter</a><a class="btn s" href="#">Local events</a></div>';
+}
+renderChapters();
+
+// social tabs
+const socialDefs = [
+  { id: 'ig', label: 'Instagram' },
+  { id: 'fb', label: 'Facebook' },
+  { id: 'yt', label: 'YouTube' }
+];
+let currentTab = 'ig';
+function renderSocial(){
+  const tabsEl = document.getElementById('socialTabs');
+  const panelsEl = document.getElementById('socialPanels');
+  const followEl = document.getElementById('followLink');
+  tabsEl.innerHTML = '';
+  socialDefs.forEach(d => {
+    const btn = document.createElement('button');
+    btn.type = 'button'; btn.className = 'tab'; btn.setAttribute('role','tab');
+    btn.setAttribute('aria-selected', d.id === currentTab ? 'true' : 'false');
+    btn.textContent = d.label;
+    btn.addEventListener('click', () => { currentTab = d.id; renderSocial(); });
+    tabsEl.appendChild(btn);
+  });
+  if (currentTab === 'ig') {
+    panelsEl.innerHTML = '<div role="tabpanel" aria-label="Instagram posts" style="display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:16px">' +
+      '<div class="img" style="aspect-ratio:1/1;border-radius:8px">Latest Instagram post</div>' +
+      '<div class="img" style="aspect-ratio:1/1;border-radius:8px">Instagram post</div>' +
+      '<div class="img" style="aspect-ratio:1/1;border-radius:8px">Instagram post</div>' +
+      '<div class="img" style="aspect-ratio:1/1;border-radius:8px">Instagram post</div></div>';
+  } else if (currentTab === 'fb') {
+    panelsEl.innerHTML = '<div role="tabpanel" aria-label="Facebook posts" style="display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:16px">' +
+      '<div class="card" style="padding:16px"><div class="img" style="height:150px">Post image</div><p style="margin:0;font-size:15px">[Latest Facebook post text]</p><p class="ey">[Date]</p></div>' +
+      '<div class="card" style="padding:16px"><div class="img" style="height:150px">Post image</div><p style="margin:0;font-size:15px">[Facebook post text]</p><p class="ey">[Date]</p></div>' +
+      '<div class="card" style="padding:16px"><div class="img" style="height:150px">Post image</div><p style="margin:0;font-size:15px">[Facebook post text]</p><p class="ey">[Date]</p></div></div>';
+  } else {
+    panelsEl.innerHTML = '<div role="tabpanel" aria-label="YouTube videos" style="display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:16px">' +
+      '<div style="display:flex;flex-direction:column;gap:8px"><div class="img" style="aspect-ratio:16/9;border-radius:8px">▶ Latest video</div><p style="margin:0;font-weight:700;font-size:15px">[Video title]</p></div>' +
+      '<div style="display:flex;flex-direction:column;gap:8px"><div class="img" style="aspect-ratio:16/9;border-radius:8px">▶ Video</div><p style="margin:0;font-weight:700;font-size:15px">[Video title]</p></div>' +
+      '<div style="display:flex;flex-direction:column;gap:8px"><div class="img" style="aspect-ratio:16/9;border-radius:8px">▶ Video</div><p style="margin:0;font-weight:700;font-size:15px">[Video title]</p></div></div>';
+  }
+  followEl.textContent = 'Follow FSS on ' + socialDefs.find(d => d.id === currentTab).label + ' →';
+}
+renderSocial();
+
+document.getElementById('joinListBtn').addEventListener('click', function(){
+  alert('Wireframe only — this would submit the email sign-up form.');
+});
+</script>
+</body>
+</html>
